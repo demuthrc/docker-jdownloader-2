@@ -1,7 +1,6 @@
 #
-# jdownloader-2 Dockerfile
+# Megabasterd Dockerfile
 #
-# https://github.com/jlesage/docker-jdownloader-2
 #
 
 # Pull base image.
@@ -11,7 +10,7 @@ FROM jlesage/baseimage-gui:alpine-3.12-v3.5.7
 ARG DOCKER_IMAGE_VERSION=unknown
 
 # Define software download URLs.
-ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
+ARG JDOWNLOADER_URL=https://github.com/tonikelope/megabasterd/releases/download/v7.42/MegaBasterd_7.42.jar
 
 # Define working directory.
 WORKDIR /tmp
@@ -41,19 +40,19 @@ RUN \
 
 # Maximize only the main/initial window.
 RUN \
-    sed-patch 's/<application type="normal">/<application type="normal" title="JDownloader 2">/' \
+    sed-patch 's/<application type="normal">/<application type="normal" title="Megabasterd">/' \
         /etc/xdg/openbox/rc.xml
 
 # Generate and install favicons.
 RUN \
-    APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
+    APP_ICON_URL=https://github.com/tonikelope/megabasterd/blob/master/src/main/resources/images/mbasterd_logo_git.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
 COPY rootfs/ /
 
 # Set environment variables.
-ENV APP_NAME="JDownloader 2" \
+ENV APP_NAME="Megabasterd" \
     S6_KILL_GRACETIME=8000
 
 # Define mountable directories.
@@ -66,8 +65,8 @@ EXPOSE 3129
 
 # Metadata.
 LABEL \
-      org.label-schema.name="jdownloader-2" \
-      org.label-schema.description="Docker container for JDownloader 2" \
+      org.label-schema.name="megabasterd" \
+      org.label-schema.description="Docker container for Megabasterd" \
       org.label-schema.version="$DOCKER_IMAGE_VERSION" \
       org.label-schema.vcs-url="https://github.com/jlesage/docker-jdownloader-2" \
       org.label-schema.schema-version="1.0"
