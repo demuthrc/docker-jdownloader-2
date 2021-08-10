@@ -1,25 +1,16 @@
-# Docker container for JDownloader 2
-[![Docker Image Size](https://img.shields.io/docker/image-size/jlesage/jdownloader-2/latest)](https://hub.docker.com/r/jlesage/jdownloader-2/tags) [![Build Status](https://drone.le-sage.com/api/badges/jlesage/docker-jdownloader-2/status.svg)](https://drone.le-sage.com/jlesage/docker-jdownloader-2) [![GitHub Release](https://img.shields.io/github/release/jlesage/docker-jdownloader-2.svg)](https://github.com/jlesage/docker-jdownloader-2/releases/latest) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/JocelynLeSage/0usd)
+# Docker container for Megabasterd
+[![Docker Image Size](https://img.shields.io/docker/image-size/jlesage/megabasterd/latest)](https://hub.docker.com/r/jlesage/megabasterd/tags) [![Build Status](https://drone.le-sage.com/api/badges/jlesage/docker-megabasterd/status.svg)](https://drone.le-sage.com/jlesage/docker-megabasterd) [![GitHub Release](https://img.shields.io/github/release/jlesage/docker-megabasterd.svg)](https://github.com/jlesage/docker-megabasterd/releases/latest) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/JocelynLeSage/0usd)
 
-This is a Docker container for [JDownloader 2](http://jdownloader.org/).
-
+This is a Docker container for Megabasterd
 The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.
 
 ---
-
-[![JDownloader 2 logo](https://images.weserv.nl/?url=raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png&w=200)](http://jdownloader.org/)[![JDownloader 2](https://dummyimage.com/400x110/ffffff/575757&text=JDownloader+2)](http://jdownloader.org/)
-
-JDownloader 2 is a free, open-source download management tool with a huge
-community of developers that makes downloading as easy and fast as it should be.
-Users can start, stop or pause downloads, set bandwith limitations, auto-extract
-archives and much more. It's an easy-to-extend framework that can save hours of
-your valuable time every day!
 
 ---
 
 ## Table of Content
 
-   * [Docker container for JDownloader 2](#docker-container-for-jdownloader-2)
+   * [Docker container for Megabasterd](#docker-container-for-megabasterd)
       * [Table of Content](#table-of-content)
       * [Quick Start](#quick-start)
       * [Usage](#usage)
@@ -41,7 +32,7 @@ your valuable time every day!
          * [Routing Based on Hostname](#routing-based-on-hostname)
          * [Routing Based on URL Path](#routing-based-on-url-path)
       * [Shell Access](#shell-access)
-      * [MyJDownloader](#myjdownloader)
+      * [Mymegabasterd](#mymegabasterd)
          * [Direct Connection](#direct-connection)
       * [Click'n'Load](#clicknload)
       * [Support or Contact](#support-or-contact)
@@ -51,31 +42,31 @@ your valuable time every day!
 **NOTE**: The Docker command provided in this quick start is given as an example
 and parameters should be adjusted to your need.
 
-Launch the JDownloader 2 docker container with the following command:
+Launch the Megabasterd docker container with the following command:
 ```
 docker run -d \
-    --name=jdownloader-2 \
+    --name=megabasterd \
     -p 5800:5800 \
-    -v /docker/appdata/jdownloader-2:/config:rw \
+    -v /docker/appdata/megabasterd:/config:rw \
     -v $HOME/Downloads:/output:rw \
-    jlesage/jdownloader-2
+    jlesage/megabasterd
 ```
 
 Where:
-  - `/docker/appdata/jdownloader-2`: This is where the application stores its configuration, log and any files needing persistency.
+  - `/docker/appdata/megabasterd`: This is where the application stores its configuration, log and any files needing persistency.
   - `$HOME/Downloads`: This is where downloaded files are stored.
 
-Browse to `http://your-host-ip:5800` to access the JDownloader 2 GUI.
+Browse to `http://your-host-ip:5800` to access the Megabasterd GUI.
 
 ## Usage
 
 ```
 docker run [-d] \
-    --name=jdownloader-2 \
+    --name=megabasterd \
     [-e <VARIABLE_NAME>=<VALUE>]... \
     [-v <HOST_DIR>:<CONTAINER_DIR>[:PERMISSIONS]]... \
     [-p <HOST_PORT>:<CONTAINER_PORT>]... \
-    jlesage/jdownloader-2
+    jlesage/megabasterd
 ```
 | Parameter | Description |
 |-----------|-------------|
@@ -130,7 +121,7 @@ container cannot be changed, but you are free to use any port on the host side.
 |------|-----------------|-------------|
 | 5800 | Mandatory | Port used to access the application's GUI via the web interface. |
 | 5900 | Optional | Port used to access the application's GUI via the VNC protocol.  Optional if no VNC client is used. |
-| 3129 | Optional | Port used by *MyJDownloader* mobile applications and browser extensions to establish a direct connect to the JDownloader Docker container instance.  Port needs to be exposed only if *MyJDownloader* is enabled and configured in *Direct Connection* mode.  **NOTE**: Since this port is being reported to the *MyJDownloader* online service, the port mapped on the host side **must** be the same (i.e. 3129). |
+| 3129 | Optional | Port used by *Mymegabasterd* mobile applications and browser extensions to establish a direct connect to the megabasterd Docker container instance.  Port needs to be exposed only if *Mymegabasterd* is enabled and configured in *Direct Connection* mode.  **NOTE**: Since this port is being reported to the *Mymegabasterd* online service, the port mapped on the host side **must** be the same (i.e. 3129). |
 
 ### Changing Parameters of a Running Container
 
@@ -143,11 +134,11 @@ re-create the container:
 
   1. Stop the container (if it is running):
 ```
-docker stop jdownloader-2
+docker stop megabasterd
 ```
   2. Remove the container:
 ```
-docker rm jdownloader-2
+docker rm megabasterd
 ```
   3. Create/start the container using the `docker run` command, by adjusting
      parameters as needed.
@@ -168,12 +159,12 @@ ports are part of the example.
 ```yaml
 version: '3'
 services:
-  jdownloader-2:
-    image: jlesage/jdownloader-2
+  megabasterd:
+    image: jlesage/megabasterd
     ports:
       - "5800:5800"
     volumes:
-      - "/docker/appdata/jdownloader-2:/config:rw"
+      - "/docker/appdata/megabasterd:/config:rw"
       - "$HOME/Downloads:/output:rw"
 ```
 
@@ -195,15 +186,15 @@ Finally, the Docker image can be manually updated with these steps:
 
   1. Fetch the latest image:
 ```
-docker pull jlesage/jdownloader-2
+docker pull jlesage/megabasterd
 ```
   2. Stop the container:
 ```
-docker stop jdownloader-2
+docker stop megabasterd
 ```
   3. Remove the container:
 ```
-docker rm jdownloader-2
+docker rm megabasterd
 ```
   4. Create and start the container using the `docker run` command, with the
 the same parameters that were used when it was deployed initially.
@@ -217,11 +208,11 @@ container image.
 
   1.  Open the *Docker* application.
   2.  Click on *Registry* in the left pane.
-  3.  In the search bar, type the name of the container (`jlesage/jdownloader-2`).
+  3.  In the search bar, type the name of the container (`jlesage/megabasterd`).
   4.  Select the image, click *Download* and then choose the `latest` tag.
   5.  Wait for the download to complete.  A  notification will appear once done.
   6.  Click on *Container* in the left pane.
-  7.  Select your JDownloader 2 container.
+  7.  Select your Megabasterd container.
   8.  Stop it by clicking *Action*->*Stop*.
   9.  Clear the container by clicking *Action*->*Reset* (or *Action*->*Clear* if
       you don't have the latest *Docker* application).  This removes the
@@ -367,7 +358,7 @@ In this scenario, each hostname is routed to a different application/container.
 
 For example, let's say the reverse proxy server is running on the same machine
 as this container.  The server would proxy all HTTP requests sent to
-`jdownloader-2.domain.tld` to the container at `127.0.0.1:5800`.
+`megabasterd.domain.tld` to the container at `127.0.0.1:5800`.
 
 Here are the relevant configuration elements that would be added to the NGINX
 configuration:
@@ -378,7 +369,7 @@ map $http_upgrade $connection_upgrade {
 	''      close;
 }
 
-upstream docker-jdownloader-2 {
+upstream docker-megabasterd {
 	# If the reverse proxy server is not running on the same machine as the
 	# Docker container, use the IP of the Docker host here.
 	# Make sure to adjust the port according to how port 5800 of the
@@ -389,14 +380,14 @@ upstream docker-jdownloader-2 {
 server {
 	[...]
 
-	server_name jdownloader-2.domain.tld;
+	server_name megabasterd.domain.tld;
 
 	location / {
-	        proxy_pass http://docker-jdownloader-2;
+	        proxy_pass http://docker-megabasterd;
 	}
 
 	location /websockify {
-		proxy_pass http://docker-jdownloader-2;
+		proxy_pass http://docker-megabasterd;
 		proxy_http_version 1.1;
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection $connection_upgrade;
@@ -413,7 +404,7 @@ route to different applications/containers.
 
 For example, let's say the reverse proxy server is running on the same machine
 as this container.  The server would proxy all HTTP requests for
-`server.domain.tld/jdownloader-2` to the container at `127.0.0.1:5800`.
+`server.domain.tld/megabasterd` to the container at `127.0.0.1:5800`.
 
 Here are the relevant configuration elements that would be added to the NGINX
 configuration:
@@ -424,7 +415,7 @@ map $http_upgrade $connection_upgrade {
 	''      close;
 }
 
-upstream docker-jdownloader-2 {
+upstream docker-megabasterd {
 	# If the reverse proxy server is not running on the same machine as the
 	# Docker container, use the IP of the Docker host here.
 	# Make sure to adjust the port according to how port 5800 of the
@@ -435,11 +426,11 @@ upstream docker-jdownloader-2 {
 server {
 	[...]
 
-	location = /jdownloader-2 {return 301 $scheme://$http_host/jdownloader-2/;}
-	location /jdownloader-2/ {
-		proxy_pass http://docker-jdownloader-2/;
-		location /jdownloader-2/websockify {
-			proxy_pass http://docker-jdownloader-2/websockify/;
+	location = /megabasterd {return 301 $scheme://$http_host/megabasterd/;}
+	location /megabasterd/ {
+		proxy_pass http://docker-megabasterd/;
+		location /megabasterd/websockify {
+			proxy_pass http://docker-megabasterd/websockify/;
 			proxy_http_version 1.1;
 			proxy_set_header Upgrade $http_upgrade;
 			proxy_set_header Connection $connection_upgrade;
@@ -460,55 +451,3 @@ docker exec -ti CONTAINER sh
 Where `CONTAINER` is the ID or the name of the container used during its
 creation (e.g. `crashplan-pro`).
 
-## MyJDownloader
-
-[MyJDownloader](https://my.jdownloader.org) is an online service providing
-remote access to your JDownloader with Web Interface, Android App, iPhone App,
-Windows Phone App and Browser Extensions.  It allows to check download status,
-add links and solve captchas from everywhere.
-
-To activate, open the JDownloader UI and click the *My.JDownloader* tab.
-
-### Direct Connection
-
-When using MyJDownloader from a device on the same local network as the
-JDownloader Docker container instance, *Direct Connection* mode can be enabled
-to reduce the latency and increase the bandwidth.  With this mode, instead of
-going through the cloud, the communication is done through a direct connection
-between the device and JDownloader.
-
-The default container's network being in *bridge* mode, the *Direct Connection*
-mode is not automatically detected/activated and the following steps are required:
-
-  * Make sure the container's port `3129` is mapped to the host port `3129`.
-    This is done by adding the parameter `-p 3129:3129` to the `docker run`
-    command.
-  * Open the JDownloader UI.
-  * Go to *Settings*->*Advanced Settings*.
-  * Search for `MyJDownloaderSettings`.
-  * Set `Custom Device IPs` to the IP address of the host running the container,
-    between double quotes (e.g. `"192.168.1.1"`).
-  * Change the `Direct Connection Mode` to `Allow lan/wan connections with
-    manual port forwarding`.
-  * Restart JDownloader (*File*->*Restart*).
-
-## Click'n'Load
-
-The easiest way to use the [Click'n'Load] feature is by installing the
-[MyJDownloader browser extension].  With this method, the browser extension
-handles POST requests to `http://127.0.0.1:9666` and forward the links to
-JDownloader via the *MyJDownloader* service.
-
-[Click'n'Load]: http://jdownloader.org/knowledge/wiki/glossary/cnl2
-[MyJDownloader browser extension]: https://my.jdownloader.org/apps/
-
-[TimeZone]: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-## Support or Contact
-
-Having troubles with the container or have questions?  Please
-[create a new issue].
-
-For other great Dockerized applications, see https://jlesage.github.io/docker-apps.
-
-[create a new issue]: https://github.com/jlesage/docker-jdownloader-2/issues
